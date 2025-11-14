@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF 鏈路預算_V1 (Web App v8.1 - Dark Mode)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="toolbox-frame">
+            <div class="toolbox-section">
+                <fieldset>
+                    <legend>主動元件 (Active)</legend>
+                    <button id="add-lna">新增 LNA</button>
+                    <button id="add-pa">新增 PA</button>
+                    <button id="add-mixer">新增混頻器 (Mixer)</button>
+                </fieldset>
+            </div>
+            <div class="toolbox-section">
+                <fieldset>
+                    <legend>被動元件 (Passive)</legend>
+                    <button id="add-filter">新增濾波器 (Filter)</button>
+                    <button id="add-atten">新增衰減器 (Att)</button>
+                    <button id="add-div2">新增 1-2 Divider</button>
+                    <button id="add-div4">新增 1-4 Divider</button>
+                    <button id="add-trace">新增 Trace Loss</button>
+                    <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
+                    <button id="add-antenna">新增天線 (Antenna)</button>
+                    <button id="add-array">新增陣列因子 (Array)</button>
+                </fieldset>
+            </div>
+            <div class="toolbox-section">
+                <fieldset>
+                    <legend>自訂元件庫 (User Library)</legend>
+                    <button id="load-component">從檔案載入...</button>
+                    <input type="file" id="file-loader-input" accept=".json" style="display: none;" multiple>
+                    <button id="merge-components">合併元件...</button>
+                </fieldset>
+            </div>
+            <div class="toolbox-hint">
+                <strong>操作提示 (v8.1)：</strong>
+                <ul>
+                    <li>TX/RX 鏈路已完全獨立</li>
+                    <li>左鍵拖曳: 移動</li>
+                    <li>Ctrl+左鍵拖曳: 拉線</li>
+                    <li>雙擊: 編輯(多頻點)</li>
+                    <li>右鍵: 選單(儲存/刪除)</li>
+                    <li>滾輪: 縮放畫布</li>
+                    <li>中鍵拖曳: 平移畫布</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-frame">
+
+            <div class="system-settings-frame">
+                <label for="entry-freq">計算頻率 (GHz):</label>
+                <input type="text" id="entry-freq" value="28">
+            </div>
+
+            <div class="tab-control">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="tx-tab">TX link budget</button>
+                    <button class="tab-button" data-tab="rx-tab">RX link budget</button>
+                </div>
+                <div class="tab-content-area">
+                    <div class="tab-content active" id="tx-tab">
+                        <label for="entry-pin">P_in (dBm):</label>
+                        <input type="text" id="entry-pin" value="-18.5">
+                    </div>
+                    <div class="tab-content" id="rx-tab">
+                        <span id="t0-label">T0 (K): 290.0</span>
+                        <span style="margin-left: 15px; color: #ADB5BD;">(G_ant 將從鏈路中的系統元件自動計算)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-frame">
+                <button id="clear-lines-button">清除所有連線</button>
+                <button id="clear-button">全部清除 (Clear All)</button>
+                <button id="calc-button">執行計算 (Calculate)</button>
+                <button id="ai-analysis-button">✨ AI 分析報告</button>
+            </div>
+
+            <fieldset class="canvas-frame">
+                <legend>3. 方塊圖 (滾輪縮放 / 中鍵平移)</legend>
+                <canvas id="rf-canvas"></canvas>
+            </fieldset>
+
+            <div class="bottom-panel-container">
+                <fieldset class="result-frame">
+                    <legend>4. 計算報告 (Results Report)</legend>
+                    <pre id="result-text">(尚未計算)</pre>
+                </fieldset>
+
+                <fieldset class="calc-log-frame">
+                    <legend>5. 計算過程 (Calculation Log)</legend>
+                    <pre id="calc-log-text">(尚未計算)</pre>
+                </fieldset>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="edit-component-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">編輯元件</h3>
+                <button id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modal-comp-name">元件名稱:</label>
+                    <input type="text" id="modal-comp-name" style="width: 300px;">
+                </div>
+                <hr>
+                <div class="modal-specs-container">
+                    <div class="freq-list-section">
+                        <label>頻點 (GHz):</label>
+                        <select id="modal-freq-list" size="10"></select>
+                        <div class="freq-btn-frame">
+                            <button id="modal-add-freq-btn">新增...</button>
+                            <button id="modal-del-freq-btn">刪除</button>
+                        </div>
+                    </div>
+                    <div id="modal-spec-editors" class="spec-editor-section">
+                        <div id="spec-status-label">請選擇一個頻點</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel-btn">取消</button>
+                <button id="modal-save-btn">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ai-analysis-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content ai-modal-content">
+            <div class="modal-header">
+                <h3 id="ai-modal-title">✨ AI 鏈路分析報告</h3>
+                <button id="ai-modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="ai-result-text">
+                    <p>正在呼叫 Gemini API 進行分析，請稍候...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="block-context-menu" class="context-menu" style="display: none;">
+        <ul>
+            <li id="menu-save-comp">儲存到元件庫...</li>
+            <li id="menu-duplicate-comp">複製元件</li> <li id="menu-delete-comp">刪除元件</li>
+            <li class="separator"></li>
+            <li id="menu-cancel-block">取消</li>
+        </ul>
+    </div>
+    
+    <div id="line-context-menu" class="context-menu" style="display: none;">
+        <ul>
+            <li id="menu-delete-line">刪除連接線</li>
+            <li class="separator"></li>
+            <li id="menu-cancel-line">取消</li>
+        </ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
