@@ -34,7 +34,10 @@ button:active {
     border-bottom-width: 1px; 
 }
 
-input[type="text"] {
+/* (v10.0 更新) 增加對 number 和 select 的支援，適配 Air Loss 介面 */
+input[type="text"], 
+input[type="number"], 
+select {
     padding: 4px 6px;
     border: 1px solid #555;
     border-radius: 3px;
@@ -42,10 +45,19 @@ input[type="text"] {
     background: #333; /* 暗色輸入框 */
     color: #E0E0E0;
 }
-input[type="text"]:focus {
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+select:focus {
     border-color: #0089F7;
     box-shadow: 0 0 0 2px #0089f733;
     outline: none;
+}
+
+/* 修正 number input 的箭頭在暗色模式下的顯示 (Webkit) */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    opacity: 0.5;
+    filter: invert(1); /* 讓箭頭變亮 */
 }
 
 fieldset {
@@ -77,10 +89,9 @@ legend {
     padding: 5px;
     display: flex;
     flex-direction: column;
-    /* overflow-y: auto; <-- ✨ 2. 修改 */
-    overflow: auto; /* ✨ 2. 新增 */
-    resize: horizontal; /* ✨ 2. 新增 */
-    min-width: 170px; /* ✨ 2. 新增 */
+    overflow: auto; 
+    resize: horizontal; 
+    min-width: 170px; 
     background: #333; /* 暗色 */
     border: 1px solid #444;
     border-radius: 6px;
@@ -134,7 +145,7 @@ legend {
     padding: 0;
     max-height: 100%;
     gap: 10px;
-    min-width: 0; /* ✨ 2. 新增 (修正 flex 壓縮問題) */
+    min-width: 0; 
 }
 
 /* ================== 右側：Tabs 和控制項 (v8.0) ================== */
@@ -261,7 +272,7 @@ legend {
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
-    min-height: 150px; /* ✨ 2. 新增 */
+    min-height: 150px; 
 }
 .canvas-frame > legend { margin-left: 10px; }
 
@@ -281,16 +292,14 @@ legend {
 
 /* v7.4: 新增底部面板容器 */
 .bottom-panel-container {
-    /* flex: 0 0 250px; <-- ✨ 3. 原本高度 */
-    flex: 0 0 350px; /* ✨ 3. 增加高度 (原 250px) */
-    /* min-height: 250px; <-- ✨ 2. 移除 */
-    min-height: 150px; /* ✨ 2. 修改 */
+    flex: 0 0 350px; 
+    min-height: 150px; 
     display: flex;
     flex-direction: row;
     gap: 10px;
     margin: 0;
-    resize: vertical; /* ✨ 2. 新增 */
-    overflow: auto; /* ✨ 2. 新增 */
+    resize: vertical; 
+    overflow: auto; 
 }
 
 .result-frame, .calc-log-frame {
@@ -305,7 +314,7 @@ legend {
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-/* ✨ 2. 新增: 讓 Result-frame 可調整 */
+
 .result-frame {
     resize: horizontal;
     overflow: auto;
