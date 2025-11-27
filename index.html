@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF 鏈路預算_V1 (Web App v8.1 - Dark Mode)</title>
-    <link rel="stylesheet" href="style.css">
+    <title>RF 鏈路預算_V1 (Web App v10.0 - Dark Mode)</title>
+    <link rel="stylesheet" href="style_9.0V.css">
 </head>
 <body>
 
     <div class="main-container">
         <div class="toolbox-frame">
+            <div style="text-align: center; margin: 5px 0 10px 0; padding-bottom: 10px; border-bottom: 2px solid #444;">
+                <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget Calculator</h3>
+                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;"> @ Yong</div>
+            </div>
             <div class="toolbox-section">
                 <fieldset>
                     <legend>主動元件 (Active)</legend>
@@ -26,7 +30,7 @@
                     <button id="add-div2">新增 1-2 Divider</button>
                     <button id="add-div4">新增 1-4 Divider</button>
                     <button id="add-trace">新增 Trace Loss</button>
-                    <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
+                    <button id="add-airloss">新增 Air Loss (Path Loss)</button> <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
                     <button id="add-antenna">新增天線 (Antenna)</button>
                     <button id="add-array">新增陣列因子 (Array)</button>
                 </fieldset>
@@ -40,13 +44,13 @@
                 </fieldset>
             </div>
             <div class="toolbox-hint">
-                <strong>操作提示 (v8.1)：</strong>
+                <strong>操作提示 (v10.0)：</strong>
                 <ul>
                     <li>TX/RX 鏈路已完全獨立</li>
                     <li>左鍵拖曳: 移動</li>
                     <li>Ctrl+左鍵拖曳: 拉線</li>
-                    <li>雙擊: 編輯(多頻點)</li>
-                    <li>右鍵: 選單(儲存/刪除)</li>
+                    <li>雙擊: 編輯 (支援 Air Loss 計算)</li>
+                    <li>右鍵: 選單 (複製/拆分/刪除)</li>
                     <li>滾輪: 縮放畫布</li>
                     <li>中鍵拖曳: 平移畫布</li>
                 </ul>
@@ -154,7 +158,8 @@
     <div id="block-context-menu" class="context-menu" style="display: none;">
         <ul>
             <li id="menu-save-comp">儲存到元件庫...</li>
-            <li id="menu-duplicate-comp">複製元件</li> <li id="menu-delete-comp">刪除元件</li>
+            <li id="menu-duplicate-comp">複製元件</li> 
+            <li id="menu-delete-comp">刪除元件</li>
             <li class="separator"></li>
             <li id="menu-cancel-block">取消</li>
         </ul>
@@ -168,6 +173,6 @@
         </ul>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app_9.0V.js"></script>
 </body>
 </html>
