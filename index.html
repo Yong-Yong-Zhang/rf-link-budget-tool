@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF 鏈路預算_V1 (Web App v10.0 - Dark Mode)</title>
-    <link rel="stylesheet" href="style_9.0V.css">
+    <title>RF 鏈路預算_V1 (Web App v10.4 - Dark Mode)</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="main-container">
         <div class="toolbox-frame">
+            
             <div style="text-align: center; margin: 5px 0 10px 0; padding-bottom: 10px; border-bottom: 2px solid #444;">
-                <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget Calculator</h3>
-                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;"> @ Yong</div>
+                <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget</h3>
+                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;">Calculator @ Yong</div>
             </div>
             <div class="toolbox-section">
                 <fieldset>
@@ -30,7 +31,8 @@
                     <button id="add-div2">新增 1-2 Divider</button>
                     <button id="add-div4">新增 1-4 Divider</button>
                     <button id="add-trace">新增 Trace Loss</button>
-                    <button id="add-airloss">新增 Air Loss (Path Loss)</button> <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
+                    <button id="add-airloss">新增 Air Loss (Path Loss)</button>
+                    <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
                     <button id="add-antenna">新增天線 (Antenna)</button>
                     <button id="add-array">新增陣列因子 (Array)</button>
                 </fieldset>
@@ -44,7 +46,7 @@
                 </fieldset>
             </div>
             <div class="toolbox-hint">
-                <strong>操作提示 (v10.0)：</strong>
+                <strong>操作提示 (v10.4)：</strong>
                 <ul>
                     <li>TX/RX 鏈路已完全獨立</li>
                     <li>左鍵拖曳: 移動</li>
@@ -173,7 +175,6 @@
         </ul>
     </div>
 
-    <script src="app_9.0V.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
-
