@@ -2760,3 +2760,4 @@ class RFLInkBudget {
     document.addEventListener('DOMContentLoaded', init);
 
 })();
+
