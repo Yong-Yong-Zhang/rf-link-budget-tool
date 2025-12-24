@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF 鏈路預算_V1 (Web App v10.4 - Dark Mode)</title>
+    <title>RF 鏈路預算_V1 (Web App v10.1V)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="main-container">
         <div class="toolbox-frame">
-            
             <div style="text-align: center; margin: 5px 0 10px 0; padding-bottom: 10px; border-bottom: 2px solid #444;">
-                <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget</h3>
-                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;">Calculator @ Yong</div>
+                <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget Calculator</h3>
+                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;"> @ Yong</div>
             </div>
             <div class="toolbox-section">
                 <fieldset>
@@ -31,8 +30,7 @@
                     <button id="add-div2">新增 1-2 Divider</button>
                     <button id="add-div4">新增 1-4 Divider</button>
                     <button id="add-trace">新增 Trace Loss</button>
-                    <button id="add-airloss">新增 Air Loss (Path Loss)</button>
-                    <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
+                    <button id="add-airloss">新增 Air Loss (Path Loss)</button> <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
                     <button id="add-antenna">新增天線 (Antenna)</button>
                     <button id="add-array">新增陣列因子 (Array)</button>
                 </fieldset>
@@ -46,15 +44,14 @@
                 </fieldset>
             </div>
             <div class="toolbox-hint">
-                <strong>操作提示 (v10.4)：</strong>
+                <strong>操作提示 (v10.1V)：</strong>
                 <ul>
-                    <li>TX/RX 鏈路已完全獨立</li>
+                    <li>Array 元件雙擊可設定行x列</li>
+                    <li>被動元件可分開設定 TX/RX 損耗</li>
                     <li>左鍵拖曳: 移動</li>
                     <li>Ctrl+左鍵拖曳: 拉線</li>
-                    <li>雙擊: 編輯 (支援 Air Loss 計算)</li>
+                    <li>雙擊: 編輯元件</li>
                     <li>右鍵: 選單 (複製/拆分/刪除)</li>
-                    <li>滾輪: 縮放畫布</li>
-                    <li>中鍵拖曳: 平移畫布</li>
                 </ul>
             </div>
         </div>
@@ -77,8 +74,11 @@
                         <input type="text" id="entry-pin" value="-18.5">
                     </div>
                     <div class="tab-content" id="rx-tab">
-                        <span id="t0-label">T0 (K): 290.0</span>
-                        <span style="margin-left: 15px; color: #ADB5BD;">(G_ant 將從鏈路中的系統元件自動計算)</span>
+                         <label for="entry-rx-pin">P_in (dBm):</label>
+                         <input type="text" id="entry-rx-pin" value="-100.0" style="width: 50px; margin-right: 10px;">
+                    
+                         <span id="t0-label">T0 (K): 290.0</span>
+                         <span style="margin-left: 15px; color: #ADB5BD;">(G_ant 自動計算)</span>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,6 @@
                 <button id="clear-lines-button">清除所有連線</button>
                 <button id="clear-button">全部清除 (Clear All)</button>
                 <button id="calc-button">執行計算 (Calculate)</button>
-                <button id="ai-analysis-button">✨ AI 分析報告</button>
             </div>
 
             <fieldset class="canvas-frame">
@@ -139,20 +138,6 @@
             <div class="modal-footer">
                 <button id="modal-cancel-btn">取消</button>
                 <button id="modal-save-btn">儲存</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="ai-analysis-modal" class="modal-backdrop" style="display: none;">
-        <div class="modal-content ai-modal-content">
-            <div class="modal-header">
-                <h3 id="ai-modal-title">✨ AI 鏈路分析報告</h3>
-                <button id="ai-modal-close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="ai-result-text">
-                    <p>正在呼叫 Gemini API 進行分析，請稍候...</p>
-                </div>
             </div>
         </div>
     </div>
