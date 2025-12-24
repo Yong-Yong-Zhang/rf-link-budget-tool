@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF 鏈路預算_V1 (Web App v10.1V)</title>
+    <title>RF Link Budget Calculator (v10.2V)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,46 +12,46 @@
         <div class="toolbox-frame">
             <div style="text-align: center; margin: 5px 0 10px 0; padding-bottom: 10px; border-bottom: 2px solid #444;">
                 <h3 style="margin: 0; color: #87CEFA; font-size: 18px; font-weight: bold;">RF Link Budget Calculator</h3>
-                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;"> @ Yong</div>
+                <div style="font-size: 13px; color: #AAAAAA; margin-top: 3px;"> @ Yong (v10.2V)</div>
             </div>
             <div class="toolbox-section">
                 <fieldset>
-                    <legend>主動元件 (Active)</legend>
-                    <button id="add-lna">新增 LNA</button>
-                    <button id="add-pa">新增 PA</button>
-                    <button id="add-mixer">新增混頻器 (Mixer)</button>
+                    <legend>Active Components</legend>
+                    <button id="add-lna">Add LNA</button>
+                    <button id="add-pa">Add PA</button>
+                    <button id="add-mixer">Add Mixer</button>
                 </fieldset>
             </div>
             <div class="toolbox-section">
                 <fieldset>
-                    <legend>被動元件 (Passive)</legend>
-                    <button id="add-filter">新增濾波器 (Filter)</button>
-                    <button id="add-atten">新增衰減器 (Att)</button>
-                    <button id="add-div2">新增 1-2 Divider</button>
-                    <button id="add-div4">新增 1-4 Divider</button>
-                    <button id="add-trace">新增 Trace Loss</button>
-                    <button id="add-airloss">新增 Air Loss (Path Loss)</button> <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
-                    <button id="add-antenna">新增天線 (Antenna)</button>
-                    <button id="add-array">新增陣列因子 (Array)</button>
+                    <legend>Passive Components</legend>
+                    <button id="add-filter">Add Filter</button>
+                    <button id="add-atten">Add Attenuator</button>
+                    <button id="add-div2">Add 1-2 Divider</button>
+                    <button id="add-div4">Add 1-4 Divider</button>
+                    <button id="add-trace">Add Trace Loss</button>
+                    <button id="add-airloss">Add Air Loss (Path Loss)</button> <hr style="border-top: 1px solid #495057; margin: 10px 5px;">
+                    <button id="add-antenna">Add Antenna</button>
+                    <button id="add-array">Add Array Factor</button>
                 </fieldset>
             </div>
             <div class="toolbox-section">
                 <fieldset>
-                    <legend>自訂元件庫 (User Library)</legend>
-                    <button id="load-component">從檔案載入...</button>
+                    <legend>User Library</legend>
+                    <button id="load-component">Load from File...</button>
                     <input type="file" id="file-loader-input" accept=".json" style="display: none;" multiple>
-                    <button id="merge-components">合併元件...</button>
+                    <button id="merge-components">Merge Components...</button>
                 </fieldset>
             </div>
             <div class="toolbox-hint">
-                <strong>操作提示 (v10.1V)：</strong>
+                <strong>Tips (v10.2V):</strong>
                 <ul>
-                    <li>Array 元件雙擊可設定行x列</li>
-                    <li>被動元件可分開設定 TX/RX 損耗</li>
-                    <li>左鍵拖曳: 移動</li>
-                    <li>Ctrl+左鍵拖曳: 拉線</li>
-                    <li>雙擊: 編輯元件</li>
-                    <li>右鍵: 選單 (複製/拆分/刪除)</li>
+                    <li>Double-click Array to set Rows/Cols</li>
+                    <li>Passive components support Split TX/RX Loss</li>
+                    <li>Left Drag: Move</li>
+                    <li>Ctrl + Drag: Connect</li>
+                    <li>Double Click: Edit</li>
+                    <li>Right Click: Context Menu</li>
                 </ul>
             </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="right-frame">
 
             <div class="system-settings-frame">
-                <label for="entry-freq">計算頻率 (GHz):</label>
+                <label for="entry-freq">Frequency (GHz):</label>
                 <input type="text" id="entry-freq" value="28">
             </div>
 
             <div class="tab-control">
                 <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="tx-tab">TX link budget</button>
-                    <button class="tab-button" data-tab="rx-tab">RX link budget</button>
+                    <button class="tab-button active" data-tab="tx-tab">TX Link Budget</button>
+                    <button class="tab-button" data-tab="rx-tab">RX Link Budget</button>
                 </div>
                 <div class="tab-content-area">
                     <div class="tab-content active" id="tx-tab">
@@ -78,31 +78,31 @@
                          <input type="text" id="entry-rx-pin" value="-100.0" style="width: 50px; margin-right: 10px;">
                     
                          <span id="t0-label">T0 (K): 290.0</span>
-                         <span style="margin-left: 15px; color: #ADB5BD;">(G_ant 自動計算)</span>
+                         <span style="margin-left: 15px; color: #ADB5BD;">(Auto G_ant)</span>
                     </div>
                 </div>
             </div>
 
             <div class="control-frame">
-                <button id="clear-lines-button">清除所有連線</button>
-                <button id="clear-button">全部清除 (Clear All)</button>
-                <button id="calc-button">執行計算 (Calculate)</button>
+                <button id="clear-lines-button">Clear Connections</button>
+                <button id="clear-button">Clear All</button>
+                <button id="calc-button">Calculate</button>
             </div>
 
             <fieldset class="canvas-frame">
-                <legend>3. 方塊圖 (滾輪縮放 / 中鍵平移)</legend>
+                <legend>3. Block Diagram (Scroll to Zoom / Middle Click to Pan)</legend>
                 <canvas id="rf-canvas"></canvas>
             </fieldset>
 
             <div class="bottom-panel-container">
                 <fieldset class="result-frame">
-                    <legend>4. 計算報告 (Results Report)</legend>
-                    <pre id="result-text">(尚未計算)</pre>
+                    <legend>4. Results Report</legend>
+                    <pre id="result-text">(Not Calculated)</pre>
                 </fieldset>
 
                 <fieldset class="calc-log-frame">
-                    <legend>5. 計算過程 (Calculation Log)</legend>
-                    <pre id="calc-log-text">(尚未計算)</pre>
+                    <legend>5. Calculation Log</legend>
+                    <pre id="calc-log-text">(Not Calculated)</pre>
                 </fieldset>
             </div>
 
@@ -112,51 +112,51 @@
     <div id="edit-component-modal" class="modal-backdrop" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-title">編輯元件</h3>
+                <h3 id="modal-title">Edit Component</h3>
                 <button id="modal-close-btn">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="modal-comp-name">元件名稱:</label>
+                    <label for="modal-comp-name">Name:</label>
                     <input type="text" id="modal-comp-name" style="width: 300px;">
                 </div>
                 <hr>
                 <div class="modal-specs-container">
                     <div class="freq-list-section">
-                        <label>頻點 (GHz):</label>
+                        <label>Freq (GHz):</label>
                         <select id="modal-freq-list" size="10"></select>
                         <div class="freq-btn-frame">
-                            <button id="modal-add-freq-btn">新增...</button>
-                            <button id="modal-del-freq-btn">刪除</button>
+                            <button id="modal-add-freq-btn">Add...</button>
+                            <button id="modal-del-freq-btn">Del</button>
                         </div>
                     </div>
                     <div id="modal-spec-editors" class="spec-editor-section">
-                        <div id="spec-status-label">請選擇一個頻點</div>
+                        <div id="spec-status-label">Select a frequency</div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="modal-cancel-btn">取消</button>
-                <button id="modal-save-btn">儲存</button>
+                <button id="modal-cancel-btn">Cancel</button>
+                <button id="modal-save-btn">Save</button>
             </div>
         </div>
     </div>
 
     <div id="block-context-menu" class="context-menu" style="display: none;">
         <ul>
-            <li id="menu-save-comp">儲存到元件庫...</li>
-            <li id="menu-duplicate-comp">複製元件</li> 
-            <li id="menu-delete-comp">刪除元件</li>
+            <li id="menu-save-comp">Save to Library...</li>
+            <li id="menu-duplicate-comp">Duplicate Component</li> 
+            <li id="menu-unmerge-comp" style="display:none;">Unmerge Component</li> <li id="menu-delete-comp">Delete Component</li>
             <li class="separator"></li>
-            <li id="menu-cancel-block">取消</li>
+            <li id="menu-cancel-block">Cancel</li>
         </ul>
     </div>
     
     <div id="line-context-menu" class="context-menu" style="display: none;">
         <ul>
-            <li id="menu-delete-line">刪除連接線</li>
+            <li id="menu-delete-line">Delete Connection</li>
             <li class="separator"></li>
-            <li id="menu-cancel-line">取消</li>
+            <li id="menu-cancel-line">Cancel</li>
         </ul>
     </div>
 
