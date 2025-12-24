@@ -34,7 +34,7 @@ button:active {
     border-bottom-width: 1px; 
 }
 
-/* (v10.0 更新) 增加對 number 和 select 的支援，適配 Air Loss 介面 */
+/* (v10.1V 更新) 增加對 number 和 select 的支援 */
 input[type="text"], 
 input[type="number"], 
 select {
@@ -53,11 +53,11 @@ select:focus {
     outline: none;
 }
 
-/* 修正 number input 的箭頭在暗色模式下的顯示 (Webkit) */
+/* 修正 number input 的箭頭 */
 input[type="number"]::-webkit-inner-spin-button, 
 input[type="number"]::-webkit-outer-spin-button { 
     opacity: 0.5;
-    filter: invert(1); /* 讓箭頭變亮 */
+    filter: invert(1); 
 }
 
 fieldset {
@@ -98,7 +98,6 @@ legend {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* v8.0: 3D 工具箱按鈕 */
 .toolbox-section > fieldset {
     background-color: #383838;
 }
@@ -126,7 +125,6 @@ legend {
     border-bottom-width: 1px;
 }
 
-
 .toolbox-hint {
     margin-top: auto;
     padding: 10px;
@@ -149,8 +147,6 @@ legend {
 }
 
 /* ================== 右側：Tabs 和控制項 (v8.0) ================== */
-
-/* v6.0: 頻率設定 */
 .system-settings-frame {
     padding: 10px 12px;
     border: 1px solid #444;
@@ -196,7 +192,7 @@ legend {
     border-bottom-width: 3px;
 }
 .tab-button.active {
-    background: #3C3C3C; /* 同 fieldset */
+    background: #3C3C3C; 
     border: 1px solid #555;
     border-bottom: 1px solid #3C3C3C;
     font-weight: 600;
@@ -212,12 +208,11 @@ legend {
     border-bottom-width: 1px;
 }
 
-
 .tab-content-area { padding: 10px 12px; }
 .tab-content { display: none; }
 .tab-content.active { display: flex; align-items: center; }
 #t0-label { color: #BBB; }
-.tab-content span { color: #BBB; } /* v8.0 */
+.tab-content span { color: #BBB; }
 
 .control-frame {
     padding: 0 5px 5px 5px;
@@ -227,7 +222,6 @@ legend {
     flex-shrink: 0;
 }
 
-/* v6.0: 清除連線按鈕 */
 #clear-lines-button { 
     background-color: #5A3A3A; 
     border-color: #774E4E;
@@ -280,7 +274,6 @@ legend {
     width: 100%;
     height: 100%;
     cursor: default;
-    /* v8.0: 暗色網格 */
     background-color: #2A2A2A;
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
@@ -290,7 +283,6 @@ legend {
 }
 #rf-canvas.panning { cursor: grabbing; }
 
-/* v7.4: 新增底部面板容器 */
 .bottom-panel-container {
     flex: 0 0 350px; 
     min-height: 150px; 
@@ -314,17 +306,8 @@ legend {
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
-.result-frame {
-    resize: horizontal;
-    overflow: auto;
-    min-width: 200px;
-}
-
-.result-frame > legend, .calc-log-frame > legend { 
-    margin-left: 10px; 
-}
-
+.result-frame { resize: horizontal; overflow: auto; min-width: 200px; }
+.result-frame > legend, .calc-log-frame > legend { margin-left: 10px; }
 
 #result-text, #calc-log-text {
     flex: 1;
@@ -339,44 +322,41 @@ legend {
     color: #DDD;
     border-radius: 4px;
 }
-#calc-log-text {
-    color: #CCC;
-}
-
+#calc-log-text { color: #CCC; }
 
 /* ================== 編輯元件 Modal (v8.0) ================== */
 .modal-backdrop {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* 更暗的背景 */
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .modal-content {
-    background-color: #3C3C3C; /* 暗色 */
+    background-color: #3C3C3C;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     width: 600px;
     max-width: 90%;
     display: flex;
     flex-direction: column;
-    border: 1px solid #555; /* 暗色邊框 */
+    border: 1px solid #555;
 }
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 20px;
-    border-bottom: 1px solid #555; /* 暗色 */
+    border-bottom: 1px solid #555;
 }
 .modal-header h3 { margin: 0; font-weight: 600; color: #E0E0E0; }
 #modal-close-btn {
     font-size: 24px;
     font-weight: bold;
-    color: #AAA; /* 亮色 X */
+    color: #AAA;
     background: none;
     border: none;
     cursor: pointer;
@@ -397,7 +377,7 @@ legend {
     width: 100%; 
     flex: 1; 
     border: 1px solid #555; 
-    background: #2A2A2A; /* 暗色 */
+    background: #2A2A2A;
     color: #E0E0E0;
     padding: 2px;
 }
@@ -424,7 +404,7 @@ legend {
     cursor: pointer;
     margin-right: 3px;
     border-radius: 4px 4px 0 0;
-    border-bottom-width: 3px; /* v8.0 */
+    border-bottom-width: 3px;
 }
 .spec-tab-btn.active { 
     background: #3C3C3C; 
@@ -443,6 +423,29 @@ legend {
 .spec-tab-content.hidden { display: none; }
 .spec-grid { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; }
 .spec-grid label { text-align: right; font-size: 14px; color: #DDD; }
+
+/* v10.1V: Array Calculator 樣式 */
+.array-calc-container {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #383838;
+    border-radius: 4px;
+    border: 1px solid #444;
+}
+.array-calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.array-calc-grid div {
+    display: flex;
+    flex-direction: column;
+}
+.array-calc-grid label {
+    font-size: 12px;
+    color: #AAA;
+    margin-bottom: 4px;
+}
 
 .modal-footer {
     padding: 10px 20px;
@@ -479,33 +482,11 @@ legend {
     padding: 5px 0;
     min-width: 160px;
 }
-.context-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.context-menu li {
-    padding: 8px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #DDD;
-}
-.context-menu li:hover {
-    background-color: #555;
-    color: #00A0FF;
-}
-.context-menu li.separator {
-    height: 1px;
-    background-color: #555;
-    margin: 5px 0;
-    padding: 0;
-}
+.context-menu ul { list-style: none; padding: 0; margin: 0; }
+.context-menu li { padding: 8px 20px; font-size: 14px; cursor: pointer; color: #DDD; }
+.context-menu li:hover { background-color: #555; color: #00A0FF; }
+.context-menu li.separator { height: 1px; background-color: #555; margin: 5px 0; padding: 0; }
 
-/* --- v2.0 樣式更新 --- */
-.tab-content-area input[type="text"] {
-    width: 60px;
-}
-
-#rf-canvas.panning {
-    cursor: grabbing;
-}
+.tab-content-area input[type="text"] { width: 50px; }
+#rx-tab { gap: 5px; }
+#rx-tab span { font-size: 13px; }
